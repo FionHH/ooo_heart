@@ -1,4 +1,4 @@
-const CACHE = 'ooo-heart-v6';
+const CACHE = 'ooo-heart-v7';
 const ASSETS = ['./'];
 
 self.addEventListener('install', e => {
