@@ -100,9 +100,15 @@ body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--t
 .fb2:hover{border-color:var(--brown-mid);color:var(--text-main)}
 .free-count2{font-size:10px;color:var(--text-muted)}
 .free-count2 strong{color:var(--text-main);font-weight:500}
-.fan-zone2{position:relative;height:130px;background:var(--brown-faint);border-radius:2px;margin-bottom:10px;overflow:hidden}
-.canvas-zone2{position:relative;height:400px;border:1px solid var(--brown-border);border-radius:2px;background:var(--warm-white);overflow:hidden}
+.fan-zone2-wrap{display:flex;justify-content:center;margin-bottom:10px}.fan-zone2{position:relative;height:130px;background:var(--brown-faint);border-radius:2px;overflow:visible;flex-shrink:0}
+.canvas-zone2{position:relative;height:440px;border:1px solid var(--brown-border);border-radius:2px;background:var(--warm-white);overflow:hidden;cursor:default;touch-action:none}
+.canvas-zone2.panning{cursor:grabbing}
+.canvas-inner2{position:absolute;top:0;left:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
 .canvas-hint2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:13px;color:var(--text-faint);text-align:center;pointer-events:none;line-height:1.8;font-family:'Cormorant Garamond',serif;font-style:italic;transition:opacity .3s}
+.canvas-controls{position:absolute;bottom:8px;right:8px;display:flex;gap:4px;z-index:50}
+.cv-btn{width:28px;height:28px;border:1px solid var(--brown-border);border-radius:2px;background:var(--warm-white);color:var(--text-muted);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-user-select:none}
+.cv-btn:hover{border-color:var(--brown-mid);color:var(--text-main)}
+.canvas-scale-label{position:absolute;bottom:8px;left:8px;font-size:9px;color:var(--text-faint);letter-spacing:.06em;pointer-events:none;z-index:50;font-family:'Noto Sans TC',sans-serif}
 .free-note-section{margin-top:10px;display:none}
 .free-note-input{width:100%;padding:10px 14px;font-size:12px;border:1px solid var(--brown-border);border-radius:2px;background:var(--warm-white);color:var(--text-main);font-family:'Noto Sans TC',sans-serif;resize:none;min-height:68px;transition:border-color .15s}
 .free-note-input:focus{outline:none;border-color:var(--brown-mid)}
@@ -133,6 +139,7 @@ textarea:focus{outline:none;border-color:var(--brown-mid)}
 textarea::placeholder{color:var(--text-faint)}
 .save-rec-btn{margin-top:7px;padding:7px 16px;font-size:10px;letter-spacing:.1em;border:1px solid var(--brown-border);border-radius:2px;cursor:pointer;background:transparent;color:var(--text-muted);font-family:'Noto Sans TC',sans-serif;transition:all .15s}
 .save-rec-btn:hover{border-color:var(--brown-mid);color:var(--text-main)}
+.save-private-note{font-size:10px;color:var(--text-faint);font-style:italic;margin-top:6px;letter-spacing:.03em;line-height:1.6}
 
 /* ── HISTORY PAGE ── */
 .history-wrap{max-width:480px;margin:0 auto;padding:20px 16px 40px}
@@ -162,48 +169,8 @@ textarea::placeholder{color:var(--text-faint)}
 #layoutViewer{display:none;position:fixed;inset:0;z-index:200;background:#140e06;flex-direction:column}
 #layoutViewer.open{display:flex}
 /* ── CUSTOM DECK PAGE ── */
-.custom-wrap{padding:20px 16px 100px}
-.custom-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.custom-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:.1em;color:var(--espresso)}
-.custom-back-btn{background:none;border:none;font-size:11px;color:var(--text-muted);cursor:pointer;padding:0;font-family:'Noto Sans TC',sans-serif;letter-spacing:.04em}
-.custom-back-btn:hover{color:var(--text-main)}
-.custom-title-row{display:flex;align-items:center;gap:8px;flex:1}
-.custom-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;letter-spacing:.1em;color:var(--espresso);white-space:nowrap}
-.custom-deck-name-input{flex:1;padding:4px 8px;font-size:14px;font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:.08em;border:none;border-bottom:1px solid var(--brown-border);background:transparent;color:var(--espresso);outline:none;min-width:0}
-.custom-deck-name-input:focus{border-bottom-color:var(--brown-mid)}
-.custom-deck-name-input::placeholder{color:var(--text-faint);font-style:italic}
-.custom-count{font-size:11px;color:var(--text-faint);white-space:nowrap}
-.custom-desc{font-size:11px;color:var(--text-faint);line-height:1.7;margin-bottom:14px}
-.custom-actions{display:flex;gap:8px;margin-bottom:16px;align-items:center}
-.custom-add-btn{display:inline-flex;align-items:center;padding:7px 16px;font-size:11px;letter-spacing:.08em;border:1px solid var(--brown-mid);border-radius:2px;cursor:pointer;background:transparent;color:var(--brown-mid);font-family:'Noto Sans TC',sans-serif;transition:all .15s}
-.custom-add-btn:hover{background:var(--brown-mid);color:var(--warm-white)}
-.custom-save-all-btn{padding:7px 16px;font-size:11px;letter-spacing:.06em;border:1px solid var(--brown-mid);border-radius:2px;cursor:pointer;background:var(--brown-mid);color:var(--warm-white);font-family:'Noto Sans TC',sans-serif;transition:all .15s}
-.custom-save-all-btn:hover{background:var(--espresso);border-color:var(--espresso)}
-.custom-clear-btn{padding:7px 14px;font-size:11px;letter-spacing:.06em;border:1px solid var(--brown-border);border-radius:2px;cursor:pointer;background:transparent;color:var(--text-muted);font-family:'Noto Sans TC',sans-serif;transition:all .15s}
-.custom-clear-btn:hover{border-color:#c0392b;color:#c0392b}
-.custom-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.custom-card-item{display:flex;flex-direction:column;gap:5px;position:relative}
-.custom-card-img-wrap{position:relative;width:100%;padding-top:150%;border-radius:2px;overflow:hidden;border:1px solid var(--brown-border);background:var(--cream);cursor:pointer}
-.custom-card-img-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
-.custom-card-order{position:absolute;top:4px;left:5px;font-size:8px;color:rgba(44,31,20,.6);background:rgba(245,240,232,.8);border-radius:2px;padding:1px 4px;z-index:2}
-.custom-card-del{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(44,31,20,.55);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;line-height:1}
-.custom-card-del:hover{background:rgba(192,57,43,.8)}
-.custom-card-change{position:absolute;inset:0;background:rgba(44,31,20,.35);display:none;align-items:center;justify-content:center;font-size:10px;color:#fff;letter-spacing:.06em;z-index:1}
-.custom-card-img-wrap:hover .custom-card-change{display:flex}
-.custom-text-input{width:100%;padding:5px 8px;font-size:10px;border:1px solid var(--brown-border);border-radius:2px;background:var(--cream);color:var(--text-main);font-family:'Noto Sans TC',sans-serif;transition:border-color .15s}
-.custom-text-input:focus{outline:none;border-color:var(--brown-mid)}
-.custom-text-input::placeholder{color:var(--text-faint)}
-.custom-card-placeholder2{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--cream)}
 .ccp2-icon{font-size:20px;color:var(--text-faint)}
 .ccp2-txt{font-size:9px;color:var(--text-faint);letter-spacing:.04em}
-.custom-save-row{display:flex;align-items:center;gap:6px;margin-top:2px}
-.custom-save-card-btn{flex:1;padding:6px 0;font-size:10px;letter-spacing:.06em;border:1px solid var(--brown-border);border-radius:2px;cursor:pointer;background:transparent;color:var(--text-muted);font-family:'Noto Sans TC',sans-serif;transition:all .15s}
-.custom-save-card-btn:hover{border-color:var(--brown-mid);color:var(--brown-mid)}
-.custom-saved-txt{font-size:10px;color:var(--text-faint);white-space:nowrap}
-.custom-empty{text-align:center;padding:48px 20px;display:none}
-.custom-empty-icon{font-size:24px;color:var(--text-faint);margin-bottom:10px}
-.custom-empty-txt{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--text-muted);margin-bottom:6px}
-.custom-empty-sub{font-size:11px;color:var(--text-faint);line-height:1.6}
 
 .lv-header{padding:16px 18px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
 .lv-meta{display:flex;flex-direction:column;gap:3px}
@@ -294,15 +261,91 @@ textarea::placeholder{color:var(--text-faint)}
 .fade-up{animation:fadeUp .4s ease forwards}
 @keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
 .pop-in{animation:popIn .3s ease forwards}
+
+/* ── HELP PANEL ── */
+.help-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--brown-border);background:transparent;color:var(--text-muted);font-size:13px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-style:italic;display:flex;align-items:center;justify-content:center;transition:all .15s;position:absolute;right:16px;top:50%;transform:translateY(-50%);flex-shrink:0}
+.help-btn:hover{border-color:var(--brown-mid);color:var(--text-main)}
+.help-overlay{display:none;position:fixed;inset:0;z-index:80;background:rgba(44,31,20,.3)}
+.help-overlay.open{display:block}
+.help-panel{position:fixed;top:0;right:0;height:100%;width:min(340px,92vw);background:var(--warm-white);border-left:1px solid var(--brown-border);z-index:81;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden}
+.help-panel.open{transform:translateX(0)}
+.help-panel-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--brown-faint);flex-shrink:0}
+.help-panel-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;letter-spacing:.1em;color:var(--espresso)}
+.help-close{background:none;border:1px solid var(--brown-border);border-radius:2px;color:var(--text-muted);font-size:10px;letter-spacing:.08em;cursor:pointer;padding:5px 12px;font-family:'Noto Sans TC',sans-serif;transition:all .15s}
+.help-close:hover{border-color:var(--brown-mid);color:var(--text-main)}
+.help-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px 18px 40px}
+.help-section{margin-bottom:28px}
+.help-section-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;letter-spacing:.08em;color:var(--espresso);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--brown-faint)}
+.help-steps{list-style:none;display:flex;flex-direction:column;gap:10px}
+.help-steps li{font-size:12px;color:var(--text-main);line-height:1.7;display:flex;gap:8px}
+.help-step-num{flex-shrink:0;width:16px;height:16px;border-radius:50%;background:var(--brown-faint);color:var(--text-muted);font-size:9px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.help-steps li .help-sub{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.help-steps li .help-sub-item{font-size:11px;color:var(--text-muted);padding-left:4px;border-left:2px solid var(--brown-faint);line-height:1.6}
 </style>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" style="position:relative">
   <button class="nav-btn active" onclick="showPage('draw')" id="navDraw">占卜</button>
   <button class="nav-btn" onclick="showPage('history')" id="navHist">紀錄</button>
-  <button class="nav-btn" onclick="showPage('custom')" id="navCustom">＋ 新增牌組</button>
+  <button class="help-btn" onclick="openHelp()">？</button>
 </header>
+
+<!-- help overlay + panel -->
+<div class="help-overlay" id="helpOverlay" onclick="closeHelp()"></div>
+<div class="help-panel" id="helpPanel">
+  <div class="help-panel-header">
+    <span class="help-panel-title">使用說明</span>
+    <button class="help-close" onclick="closeHelp()">關閉</button>
+  </div>
+  <div class="help-body">
+
+    <div class="help-section">
+      <div class="help-section-title">① 點擊牌卡看牌義</div>
+      <ol class="help-steps">
+        <li><span class="help-step-num">1</span><span>抽牌後，點擊任一張已翻開的牌卡</span></li>
+        <li><span class="help-step-num">2</span><span>會彈出該張牌的牌號、名稱與關鍵字</span></li>
+        <li><span class="help-step-num">3</span><span>你也可以在彈出視窗中記錄這張牌的個人筆記，點「儲存筆記」即可保存</span></li>
+      </ol>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">② 儲存占卜紀錄</div>
+      <ol class="help-steps">
+        <li><span class="help-step-num">1</span><span>抽牌完成後，下方會出現筆記欄</span></li>
+        <li><span class="help-step-num">2</span><span>寫下這次的感受或問題，點「儲存紀錄」</span></li>
+        <li><span class="help-step-num">3</span><span>關於紀錄的保存：
+          <div class="help-sub">
+            <div class="help-sub-item">重新整理頁面 → 紀錄還在，不會消失</div>
+            <div class="help-sub-item">換瀏覽器（例如從 Safari 換到 Chrome）→ 紀錄不見，因為兩個瀏覽器各自存各自的</div>
+            <div class="help-sub-item">換裝置（例如從手機換到電腦）→ 紀錄不見，同理</div>
+          </div>
+        </span></li>
+        <li><span class="help-step-num">4</span><span>建議定期點「下載紀錄」備份</span></li>
+        <li><span class="help-step-num">5</span><span>進入「紀錄」頁面後，可以點「編輯」重新修改問題與筆記內容</span></li>
+      </ol>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">③ 自由牌陣操作方式</div>
+      <ol class="help-steps">
+        <li><span class="help-step-num">1</span><span>選擇「自由牌陣」後，牌堆會展開在上方區域</span></li>
+        <li><span class="help-step-num">2</span><span>點選「洗牌」可以重新開始</span></li>
+        <li><span class="help-step-num">3</span><span>點選「全部翻開」可以找尋主題牌</span></li>
+        <li><span class="help-step-num">4</span><span>將牌拖拉到畫布，自由排列你要的牌陣</span></li>
+        <li><span class="help-step-num">5</span><span>畫布支援雙指縮放，在空白處拖曳可以平移視角</span></li>
+        <li><span class="help-step-num">6</span><span>右下角按鈕：
+          <div class="help-sub">
+            <div class="help-sub-item">＋ 放大</div>
+            <div class="help-sub-item">− 縮小</div>
+            <div class="help-sub-item">⌂ 重置視角</div>
+          </div>
+        </span></li>
+      </ol>
+    </div>
+
+  </div>
+</div>
 
 <div id="drawPage" class="page active">
   <div class="draw-wrap">
@@ -310,7 +353,6 @@ textarea::placeholder{color:var(--text-faint)}
     <div class="deck-switch" style="margin-bottom:10px">
       <button class="deck-switch-btn active" data-deck="36">標準 36</button>
       <button class="deck-switch-btn" data-deck="40">Rana 40</button>
-      <button class="deck-switch-btn" data-deck="custom" id="deckBtnCustom">自訂</button>
     </div>
     <div class="spread-scroll">
       <button class="spread-btn active" data-spread="1">單張</button>
@@ -339,13 +381,22 @@ textarea::placeholder{color:var(--text-faint)}
         <button class="fb2" id="fShuffleBtn">洗牌</button>
         <button class="fb2" id="fRevealAllBtn">全部翻開</button>
       </div>
-      <div class="fan-zone2" id="fanZone2"></div>
+      <div class="fan-zone2-wrap"><div class="fan-zone2" id="fanZone2"></div></div>
       <div class="canvas-zone2" id="canvasZone2">
-        <div class="canvas-hint2" id="canvasHint2">將牌拖拉到這裡<br>自由排列你的牌陣</div>
+        <div class="canvas-inner2" id="canvasInner2">
+          <div class="canvas-hint2" id="canvasHint2">將牌拖拉到這裡<br>自由排列你的牌陣</div>
+        </div>
+        <div class="canvas-controls">
+          <button class="cv-btn" id="cvZoomIn" title="放大">+</button>
+          <button class="cv-btn" id="cvZoomOut" title="縮小">−</button>
+          <button class="cv-btn" id="cvReset" title="重置視角" style="font-size:10px">⌂</button>
+        </div>
+        <div class="canvas-scale-label" id="canvasScaleLabel">100%</div>
       </div>
       <div class="free-note-section" id="freeNoteSection">
         <textarea class="free-note-input" id="freeNoteInput" placeholder="記錄這次牌陣帶給你的感受或靈感…" rows="3"></textarea>
         <button class="free-save-btn" id="freeSaveBtn">儲存紀錄</button>
+        <p class="save-private-note">紀錄僅儲存於你的裝置，不會上傳或與他人共享</p>
       </div>
     </div>
 
@@ -355,6 +406,7 @@ textarea::placeholder{color:var(--text-faint)}
       <p class="note-label">今日筆記</p>
       <textarea id="noteInput" placeholder="記錄這次牌陣帶給你的感受或靈感…" rows="3"></textarea>
       <button class="save-rec-btn" id="saveRecBtn">儲存紀錄</button>
+      <p class="save-private-note">紀錄僅儲存於你的裝置，不會上傳或與他人共享</p>
     </div>
   </div>
 </div>
@@ -410,33 +462,6 @@ textarea::placeholder{color:var(--text-faint)}
   <div class="shuffle-sub" id="shuffleSub">靜心，想好你的問題…</div>
 </div>
 
-<!-- custom deck page -->
-<div id="customPage" class="page">
-  <div class="custom-wrap">
-    <div class="custom-header">
-      <div class="custom-title-row">
-        <h2 class="custom-title">自訂牌組</h2>
-        <input class="custom-deck-name-input" id="customDeckNameInput" placeholder="牌組名稱（選填）" maxlength="12">
-        <span class="custom-count" id="customCount">0 張</span>
-      </div>
-    </div>
-    <p class="custom-desc">點擊「選取圖片」上傳牌卡圖片。圖片以數字命名（如 1.jpg、2.jpg）系統會自動帶入對應牌名。資料存在你的瀏覽器，不會與他人共享。</p>
-    <div class="custom-actions">
-      <label class="custom-add-btn" id="customAddImgsBtn">
-        ＋ 選取圖片
-        <input type="file" accept="image/*" multiple id="customImgsInput" style="display:none">
-      </label>
-      <button class="custom-save-all-btn" id="customSaveAllBtn">全部儲存</button>
-      <button class="custom-clear-btn" id="customClearBtn">清除全部</button>
-    </div>
-    <div id="customCardGrid" class="custom-card-grid"></div>
-    <div class="custom-empty" id="customEmpty">
-      <p class="custom-empty-icon">✦</p>
-      <p class="custom-empty-txt">點擊「選取圖片」上傳牌卡</p>
-      <p class="custom-empty-sub">圖片以數字命名（1.jpg、2.jpg…）自動帶入牌名</p>
-    </div>
-  </div>
-</div>
 
 <div id="layoutViewer">
   <div class="lv-header">
@@ -515,29 +540,10 @@ let hasSaved=false;
 let hasDrawn=false;
 
 function getActiveDeck(){
-  if(currentDeck==='custom'){
-    const d=loadCustomDeck();
-    return d.map((c,i)=>({
-      n:i+1,
-      name:c.name||'牌'+(i+1),
-      kw:c.kw||'',
-      img:null, // images loaded async via getCustomDeckForDraw
-      extra:false
-    }));
-  }
   return currentDeck===40?DECK_40:DECK_36;
 }
 
 function getActiveDeckAsync(){
-  if(currentDeck==='custom'){
-    return loadCustomDeckFull().then(d=>d.map((c,i)=>({
-      n:i+1,
-      name:c.name||'牌'+(i+1),
-      kw:c.kw||'',
-      img:c.img||null,
-      extra:false
-    })));
-  }
   return Promise.resolve(currentDeck===40?DECK_40:DECK_36);
 }
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
@@ -546,27 +552,18 @@ function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.fl
 function showPage(p){
   document.getElementById('drawPage').classList.toggle('active',p==='draw');
   document.getElementById('histPage').classList.toggle('active',p==='history');
-  document.getElementById('customPage').classList.toggle('active',p==='custom');
   document.getElementById('navDraw').classList.toggle('active',p==='draw');
   document.getElementById('navHist').classList.toggle('active',p==='history');
-  document.getElementById('navCustom').classList.toggle('active',p==='custom');
   if(p==='history')renderHistory();
-  if(p==='custom'){renderCustomGrid();updateCustomCount();}
 }
 
 // ── DECK SWITCH ──
 document.querySelectorAll('.deck-switch-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const val=btn.dataset.deck;
-    if(val==='custom'){
-      if(!loadCustomDeck().length){
-        if(confirm('尚無自訂牌組，要前往設定嗎？'))showPage('custom');
-        return;
-      }
-    }
     document.querySelectorAll('.deck-switch-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    currentDeck=val==='custom'?'custom':parseInt(val);
+    currentDeck=parseInt(val);
     resetAll();
   });
 });
@@ -661,9 +658,6 @@ document.querySelectorAll('.spread-btn').forEach(btn=>{
 
 function doStandardDraw(){
   getActiveDeckAsync().then(activeDeck=>{
-  if(currentDeck==='custom'&&!activeDeck.length){
-    alert('自訂牌組尚無牌張，請先到「自訂」頁面上傳圖片。');return;
-  }
   resetAll();
   drawnCards=shuffle(activeDeck).slice(0,Math.min(currentSpread,activeDeck.length));
   const area=document.getElementById('spreadArea');
@@ -723,7 +717,7 @@ function openModal(card){
   if(card.img){const img=document.createElement('img');img.src=card.img;img.alt=card.name;tw.appendChild(img);}
   else{const ph=document.createElement('div');ph.className='modal-thumb-no-img';ph.textContent='✦';tw.appendChild(ph);}
   // title
-  document.getElementById('modalNum').textContent=currentDeck==='custom'?'自訂牌組 No.'+card.n:'No.'+card.n+(card.extra?' · 擴充牌':'');
+  document.getElementById('modalNum').textContent='No.'+card.n+(card.extra?' · 擴充牌':'');
   document.getElementById('modalName').textContent=card.name;
   document.getElementById('modalKw').textContent=card.kw;
   // meaning
@@ -749,24 +743,132 @@ function openModal(card){
 function closeModal(){document.getElementById('cardModal').classList.remove('open');}
 document.getElementById('cardModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
+// ── INFINITE CANVAS STATE ──
+let cvScale=1,cvPanX=0,cvPanY=0;
+const CV_MIN=0.4,CV_MAX=3,CV_STEP=0.25;
+
+function cvApplyTransform(){
+  const inner=document.getElementById('canvasInner2');
+  if(!inner)return;
+  inner.style.transform=`translate(${cvPanX}px,${cvPanY}px) scale(${cvScale})`;
+  document.getElementById('canvasScaleLabel').textContent=Math.round(cvScale*100)+'%';
+}
+
+function cvResetView(){
+  cvScale=1;cvPanX=0;cvPanY=0;cvApplyTransform();
+}
+
+let _cvControlsInited=false;
+function initCanvasControls(){
+  if(_cvControlsInited)return;_cvControlsInited=true;
+  const cz=document.getElementById('canvasZone2');
+  // zoom buttons
+  document.getElementById('cvZoomIn').onclick=e=>{e.stopPropagation();cvScale=Math.min(CV_MAX,parseFloat((cvScale+CV_STEP).toFixed(2)));cvApplyTransform();};
+  document.getElementById('cvZoomOut').onclick=e=>{e.stopPropagation();cvScale=Math.max(CV_MIN,parseFloat((cvScale-CV_STEP).toFixed(2)));cvApplyTransform();};
+  document.getElementById('cvReset').onclick=e=>{e.stopPropagation();cvResetView();};
+
+  // wheel zoom
+  cz.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const rect=cz.getBoundingClientRect();
+    const mouseX=e.clientX-rect.left;
+    const mouseY=e.clientY-rect.top;
+    const delta=e.deltaY>0?-CV_STEP:CV_STEP;
+    const newScale=Math.min(CV_MAX,Math.max(CV_MIN,parseFloat((cvScale+delta).toFixed(2))));
+    // zoom toward mouse position
+    const ratio=newScale/cvScale;
+    cvPanX=mouseX-(mouseX-cvPanX)*ratio;
+    cvPanY=mouseY-(mouseY-cvPanY)*ratio;
+    cvScale=newScale;
+    cvApplyTransform();
+  },{passive:false});
+
+  // pinch-to-zoom (touch)
+  let lastPinchDist=0,lastPinchMidX=0,lastPinchMidY=0;
+  cz.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){
+      const t0=e.touches[0],t1=e.touches[1];
+      lastPinchDist=Math.hypot(t1.clientX-t0.clientX,t1.clientY-t0.clientY);
+      const rect=cz.getBoundingClientRect();
+      lastPinchMidX=((t0.clientX+t1.clientX)/2)-rect.left;
+      lastPinchMidY=((t0.clientY+t1.clientY)/2)-rect.top;
+    }
+  },{passive:true});
+  cz.addEventListener('touchmove',e=>{
+    if(e.touches.length===2){
+      e.preventDefault();
+      const t0=e.touches[0],t1=e.touches[1];
+      const dist=Math.hypot(t1.clientX-t0.clientX,t1.clientY-t0.clientY);
+      if(lastPinchDist>0){
+        const ratio=dist/lastPinchDist;
+        const newScale=Math.min(CV_MAX,Math.max(CV_MIN,cvScale*ratio));
+        const r=newScale/cvScale;
+        cvPanX=lastPinchMidX-(lastPinchMidX-cvPanX)*r;
+        cvPanY=lastPinchMidY-(lastPinchMidY-cvPanY)*r;
+        cvScale=newScale;
+        cvApplyTransform();
+      }
+      lastPinchDist=dist;
+    }
+  },{passive:false});
+  cz.addEventListener('touchend',e=>{if(e.touches.length<2)lastPinchDist=0;},{passive:true});
+
+  // pan by dragging blank canvas (pointer events)
+  let panActive=false,panStartX=0,panStartY=0,panStartPX=0,panStartPY=0,panTarget=null;
+  cz.addEventListener('mousedown',e=>{
+    // only pan if the target is the canvas zone or inner (not a card)
+    if(e.target===cz||e.target===document.getElementById('canvasInner2')||e.target===document.getElementById('canvasHint2')){
+      panActive=true;panStartX=e.clientX;panStartY=e.clientY;panStartPX=cvPanX;panStartPY=cvPanY;
+      cz.classList.add('panning');
+    }
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!panActive)return;
+    cvPanX=panStartPX+(e.clientX-panStartX);
+    cvPanY=panStartPY+(e.clientY-panStartY);
+    cvApplyTransform();
+  });
+  document.addEventListener('mouseup',()=>{if(panActive){panActive=false;cz.classList.remove('panning');}});
+
+  // touch pan (single finger on blank)
+  let touchPanActive=false,touchPanStartX=0,touchPanStartY=0,touchPanPX=0,touchPanPY=0;
+  cz.addEventListener('touchstart',e=>{
+    if(e.touches.length===1){
+      const t=e.touches[0];
+      const el=document.elementFromPoint(t.clientX,t.clientY);
+      if(el===cz||el===document.getElementById('canvasInner2')||el===document.getElementById('canvasHint2')){
+        touchPanActive=true;touchPanStartX=t.clientX;touchPanStartY=t.clientY;touchPanPX=cvPanX;touchPanPY=cvPanY;
+      }
+    }
+  },{passive:true});
+  cz.addEventListener('touchmove',e=>{
+    if(touchPanActive&&e.touches.length===1){
+      e.preventDefault();
+      const t=e.touches[0];
+      cvPanX=touchPanPX+(t.clientX-touchPanStartX);
+      cvPanY=touchPanPY+(t.clientY-touchPanStartY);
+      cvApplyTransform();
+    }
+  },{passive:false});
+  cz.addEventListener('touchend',()=>{touchPanActive=false;},{passive:true});
+}
+
 // ── FREE DRAW ──
 function initFreeDraw(){
   allOpen2=false;freeCanvasItems=[];
+  cvResetView();
   getActiveDeckAsync().then(activeDeck2=>{
-  if(currentDeck==='custom'&&!activeDeck2.length){
-    alert('自訂牌組尚無牌張，請先到「自訂」頁面上傳圖片。');
-    showPage('custom');return;
-  }
   fanDeck2=shuffle(activeDeck2);
   document.getElementById('freeCanvasCount').textContent='0';
   document.getElementById('canvasHint2').style.opacity='1';
-  document.getElementById('canvasZone2').querySelectorAll('.cc2').forEach(e=>e.remove());
+  document.getElementById('canvasInner2').querySelectorAll('.cc2').forEach(e=>e.remove());
   document.getElementById('fRevealAllBtn').textContent='全部翻開';
   document.getElementById('freeHintTxt').textContent='選擇你要的牌・拖拉到畫布';
   document.getElementById('freeNoteSection').style.display='none';
   document.getElementById('freeNoteInput').value='';
   document.getElementById('freeSaveBtn').textContent='儲存紀錄';
   buildFanDeck2();
+  initCanvasControls();
   }); // end getActiveDeckAsync
 }
 
@@ -774,12 +876,14 @@ function buildFanDeck2(){
   const zone=document.getElementById('fanZone2');
   zone.querySelectorAll('.fc2').forEach(e=>e.remove());
   fanCards2=[];fanStates2=new Array(fanDeck2.length).fill(FS_REST);
-  const zw=zone.offsetWidth||340;
+  const n=fanDeck2.length;
   const cardW=60;
-  const available=zw-16;
-  const spW=Math.max(2,Math.floor((available-cardW)/(fanDeck2.length-1)));
-  const totalW=spW*(fanDeck2.length-1)+cardW;
-  const startX=Math.max(8,Math.floor((zw-totalW)/2));
+  const spW=13; // each card shows ~13px of its left edge before next card overlaps
+  const padding=12;
+  const totalW=padding + spW*(n-1) + cardW + padding;
+  // set zone width to exactly fit all cards
+  zone.style.width=totalW+'px';
+  const startX=padding;
   fanDeck2.forEach((card,i)=>{
     const el=document.createElement('div');
     el.className='fc2 s-rest';
@@ -864,9 +968,12 @@ function setupFc2(el,card,idx){
         const inCanvas=ex>=czR.left&&ex<=czR.right&&ey>=czR.top&&ey<=czR.bottom;
         if(inCanvas){
           el.remove();fanCards2[idx]=null;
-          const px=Math.max(0,Math.min(czR.width-60,ex-czR.left-offX));
-          const py=Math.max(0,Math.min(czR.height-90,ey-czR.top-offY));
-          placeOnCanvas2(card,px,py,wasOpen);
+          // convert screen coords to virtual canvas coords
+          const screenX=ex-czR.left-offX;
+          const screenY=ey-czR.top-offY;
+          const vx=(screenX-cvPanX)/cvScale;
+          const vy=(screenY-cvPanY)/cvScale;
+          placeOnCanvas2(card,vx,vy,wasOpen);
         }
       }
     };
@@ -893,17 +1000,17 @@ document.getElementById('fRevealAllBtn').addEventListener('click',()=>{
 
 document.getElementById('fShuffleBtn').addEventListener('click',initFreeDraw);
 
-function placeOnCanvas2(card,x,y,startFlipped){
+function placeOnCanvas2(card,vx,vy,startFlipped){
+  // vx, vy are virtual canvas coordinates (not affected by pan/zoom)
+  const inner=document.getElementById('canvasInner2');
   const cz=document.getElementById('canvasZone2');
   const el=document.createElement('div');
-  el.className='cc2';el.style.cssText=`left:${x}px;top:${y}px;`;
+  el.className='cc2';el.style.cssText=`left:${vx}px;top:${vy}px;`;
   let flipped=startFlipped,isDragging=false;
   const showFace=()=>{
     flipped=true;
-    // capture current position BEFORE any DOM changes
     const curLeft=el.style.left;const curTop=el.style.top;
-    el.classList.add('flipped');el.style.cursor='default';el.innerHTML='';
-    // restore position immediately after innerHTML clear
+    el.classList.add('flipped');el.style.cursor='grab';el.innerHTML='';
     el.style.left=curLeft;el.style.top=curTop;
     if(card.img){
       const img=document.createElement('img');
@@ -920,44 +1027,37 @@ function placeOnCanvas2(card,x,y,startFlipped){
     showFace();
   } else {
     const dot=document.createElement('div');dot.className='cc2-dot';el.appendChild(dot);
-
     let touchMoved=false,touchStartX=0,touchStartY=0;
-
-    // mouse click (desktop)
-    el.addEventListener('click',e=>{
-      if(!isDragging&&!flipped)showFace();
-    });
-
-    // touch tap (mobile) - separate from drag
+    el.addEventListener('click',e=>{if(!isDragging&&!flipped)showFace();});
     el.addEventListener('touchstart',e=>{
       if(flipped)return;
-      const t=e.touches[0];
-      touchStartX=t.clientX;touchStartY=t.clientY;touchMoved=false;
+      const t=e.touches[0];touchStartX=t.clientX;touchStartY=t.clientY;touchMoved=false;
     },{passive:true});
-
     el.addEventListener('touchmove',e=>{
       const t=e.touches[0];
       if(Math.hypot(t.clientX-touchStartX,t.clientY-touchStartY)>8)touchMoved=true;
     },{passive:true});
-
     el.addEventListener('touchend',e=>{
-      if(!flipped&&!touchMoved){
-        e.preventDefault();
-        showFace();
-      }
+      if(!flipped&&!touchMoved){e.preventDefault();showFace();}
     },{passive:false});
   }
 
-  const startDrag=(cx,cy,e)=>{
-    if(flipped)return;
+  const startDrag=(cx,cy,evObj)=>{
+    if(evObj&&evObj.stopPropagation)evObj.stopPropagation();
     isDragging=false;
-    const r=el.getBoundingClientRect();const offX=cx-r.left,offY=cy-r.top;
+    // offset in screen pixels from card top-left to pointer
+    const r=el.getBoundingClientRect();
+    const offX=(cx-r.left)/cvScale;
+    const offY=(cy-r.top)/cvScale;
     let moved=false;
     const move=(mx,my)=>{
       moved=true;isDragging=true;
       const czR=cz.getBoundingClientRect();
-      el.style.left=Math.max(0,Math.min(czR.width-60,mx-czR.left-offX))+'px';
-      el.style.top=Math.max(0,Math.min(czR.height-90,my-czR.top-offY))+'px';
+      // convert screen coords to virtual coords
+      const vxNew=(mx-czR.left-cvPanX)/cvScale - offX;
+      const vyNew=(my-czR.top-cvPanY)/cvScale - offY;
+      el.style.left=vxNew+'px';
+      el.style.top=vyNew+'px';
     };
     const end=()=>{
       document.removeEventListener('mousemove',onMM);document.removeEventListener('mouseup',onMU);
@@ -966,14 +1066,19 @@ function placeOnCanvas2(card,x,y,startFlipped){
       setTimeout(()=>{isDragging=false;},50);
     };
     el.style.zIndex='100';
-    const onMM=e=>move(e.clientX,e.clientY);const onMU=()=>end();
-    const onTM=e=>{e.preventDefault();const t=e.touches[0];move(t.clientX,t.clientY);};
+    const onMM=e=>{e.stopPropagation();move(e.clientX,e.clientY);};
+    const onMU=()=>end();
+    const onTM=e=>{e.preventDefault();e.stopPropagation();const t=e.touches[0];move(t.clientX,t.clientY);};
     const onTE=()=>end();
     document.addEventListener('mousemove',onMM);document.addEventListener('mouseup',onMU);
     document.addEventListener('touchmove',onTM,{passive:false});document.addEventListener('touchend',onTE);
   };
-  el.addEventListener('mousedown',e=>startDrag(e.clientX,e.clientY,e));
-  cz.appendChild(el);freeCanvasItems.push({card,el});
+  el.addEventListener('mousedown',e=>{e.stopPropagation();startDrag(e.clientX,e.clientY,e);});
+  el.addEventListener('touchstart',e=>{
+    e.stopPropagation();
+    const t=e.touches[0];startDrag(t.clientX,t.clientY,e);
+  },{passive:false});
+  inner.appendChild(el);freeCanvasItems.push({card,el});
   document.getElementById('freeCanvasCount').textContent=String(freeCanvasItems.length);
   document.getElementById('canvasHint2').style.opacity='0';
   document.getElementById('freeNoteSection').style.display='block';
@@ -1026,20 +1131,22 @@ document.getElementById('freeSaveBtn').addEventListener('click',()=>{
   if(!freeCanvasItems.length)return;
   const q=document.getElementById('qInput').value.trim();
   const note=document.getElementById('freeNoteInput').value.trim();
-  const cz=document.getElementById('canvasZone2');
-  const czW=cz.offsetWidth||360;
-  const czH=cz.offsetHeight||400;
   const date=new Date().toLocaleString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-  // save card n + normalised x/y (0-1) so it scales on any screen
+  // save raw virtual coords; we'll normalise at render time
+  const vxArr=freeCanvasItems.map(c=>parseFloat(c.el.style.left)||0);
+  const vyArr=freeCanvasItems.map(c=>parseFloat(c.el.style.top)||0);
+  const minVx=Math.min(...vxArr,0),minVy=Math.min(...vyArr,0);
+  const maxVx=Math.max(...vxArr.map(v=>v+60)),maxVy=Math.max(...vyArr.map(v=>v+90));
+  const vW=Math.max(maxVx-minVx,60),vH=Math.max(maxVy-minVy,90);
   const rec={
     date,deck:currentDeck,
     spread:'自由牌陣',
     isFree:true,
-    canvasW:czW,canvasH:czH,
-    cards:freeCanvasItems.map(c=>({
+    canvasW:vW,canvasH:vH,
+    cards:freeCanvasItems.map((c,i)=>({
       n:c.card.n,name:c.card.name,extra:c.card.extra||false,
-      xr:parseFloat((parseInt(c.el.style.left)/czW).toFixed(4)),
-      yr:parseFloat((parseInt(c.el.style.top)/czH).toFixed(4))
+      xr:parseFloat(((vxArr[i]-minVx)/vW).toFixed(4)),
+      yr:parseFloat(((vyArr[i]-minVy)/vH).toFixed(4))
     })),
     question:q,note
   };
@@ -1052,11 +1159,6 @@ document.getElementById('freeSaveBtn').addEventListener('click',()=>{
 
 // helper: get card image by number and deck
 function getCardImg(n,deck){
-  if(deck==='custom'){
-    // drawnCards already has img from getActiveDeckAsync
-    if(drawnCards&&drawnCards[n-1])return drawnCards[n-1].img;
-    return null;
-  }
   const d=deck===40?DECK_40:DECK_36;
   const c=d.find(x=>x.n===n);
   return c?c.img:null;
@@ -1071,7 +1173,7 @@ document.getElementById('downloadAllBtn').addEventListener('click',()=>{
   const recs=JSON.parse(localStorage.getItem('ooo_heart_recs')||'[]');
   if(!recs.length){alert('尚無紀錄可下載。');return;}
   const lines=recs.map((r,i)=>{
-    const deckLabel=r.deck==='custom'?'自訂牌組':r.deck===40?'Rana 40':'標準 36';
+    const deckLabel=r.deck===40?'Rana 40':'標準 36';
     let txt=`── ${i+1}. ${r.date} ──\n`;
     txt+=`牌組：${deckLabel}　牌陣：${r.spread}\n`;
     txt+=`牌卡：${r.cards.map(c=>c.name+(c.extra?'✦':'')).join(' · ')}\n`;
@@ -1094,8 +1196,6 @@ function openIDB(){
     const req=indexedDB.open('ooo_heart_db',1);
     req.onupgradeneeded=e=>{
       const db=e.target.result;
-      if(!db.objectStoreNames.contains('custom_deck'))
-        db.createObjectStore('custom_deck',{keyPath:'id'});
       if(!db.objectStoreNames.contains('meta'))
         db.createObjectStore('meta',{keyPath:'key'});
     };
@@ -1104,218 +1204,6 @@ function openIDB(){
   });
 }
 
-function loadCustomDeck(){
-  // sync fallback from localStorage for initial render
-  return JSON.parse(localStorage.getItem('ooo_custom_deck')||'[]');
-}
-function saveCustomDeck(deck){
-  // save lightweight version (no img) to localStorage for fast access
-  const light=deck.map(c=>({id:c.id,name:c.name,kw:c.kw,srcNum:c.srcNum,hasImg:!!c.img}));
-  localStorage.setItem('ooo_custom_deck',JSON.stringify(light));
-  // save full data (with img) to IndexedDB
-  openIDB().then(db=>{
-    const tx=db.transaction('custom_deck','readwrite');
-    const store=tx.objectStore('custom_deck');
-    store.clear();
-    deck.forEach(c=>store.put(c));
-  });
-}
-function loadCustomDeckFull(){
-  return openIDB().then(db=>{
-    return new Promise((res,rej)=>{
-      const tx=db.transaction('custom_deck','readonly');
-      const store=tx.objectStore('custom_deck');
-      const req=store.getAll();
-      req.onsuccess=()=>res(req.result||[]);
-      req.onerror=()=>res(loadCustomDeck());
-    });
-  });
-}
-function clearCustomDeckIDB(){
-  localStorage.removeItem('ooo_custom_deck');
-  return openIDB().then(db=>{
-    const tx=db.transaction('custom_deck','readwrite');
-    tx.objectStore('custom_deck').clear();
-  });
-}
-
-function loadCustomMeta(){return JSON.parse(localStorage.getItem('ooo_custom_meta')||'{"name":""}');}
-function saveCustomMeta(meta){localStorage.setItem('ooo_custom_meta',JSON.stringify(meta));}
-function getCustomDeckName(){return loadCustomMeta().name||'自訂牌組';}
-
-function updateCustomCount(){
-  const deck=loadCustomDeck();
-  document.getElementById('customCount').textContent=deck.length+'張';
-  const empty=document.getElementById('customEmpty');
-  const grid=document.getElementById('customCardGrid');
-  if(deck.length===0){empty.style.display='block';grid.style.display='none';}
-  else{empty.style.display='none';grid.style.display='grid';}
-  // load name into input
-  const nameInput=document.getElementById('customDeckNameInput');
-  if(nameInput)nameInput.value=loadCustomMeta().name||'';
-  // update deck switch btn label
-  const btn=document.getElementById('deckBtnCustom');
-  if(btn)btn.textContent=getCustomDeckName();
-}
-
-function compressImage(file,cb){
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const orig=new Image();
-    orig.onload=()=>{
-      const MAX=480;
-      let w=orig.width,h=orig.height;
-      if(w>MAX||h>MAX){const s=MAX/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s);}
-      const canvas=document.createElement('canvas');
-      canvas.width=w;canvas.height=h;
-      canvas.getContext('2d').drawImage(orig,0,0,w,h);
-      cb(canvas.toDataURL('image/jpeg',0.60));
-    };
-    orig.src=e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-// add multiple files
-function processUploadedFiles(files){
-  if(!files.length)return;
-  const deck=loadCustomDeck();
-  let processed=0;
-  const allCards=[...DECK_36,...DECK_40.filter(c=>c.extra)];
-  // filter only image files
-  const imgFiles=files.filter(f=>f.type.startsWith('image/'));
-  if(!imgFiles.length)return;
-  // sort by numeric filename
-  imgFiles.sort((a,b)=>{
-    const na=parseInt(a.name)||0,nb=parseInt(b.name)||0;
-    return na-nb;
-  });
-  imgFiles.forEach(file=>{
-    const num=parseInt(file.name);
-    const match=allCards.find(c=>c.n===num);
-    const autoName=match?match.name:'';
-    const autoKw=match?match.kw:'';
-    compressImage(file,dataUrl=>{
-      const id='c_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
-      deck.push({id,img:dataUrl,name:autoName,kw:autoKw,srcNum:num});
-      processed++;
-      if(processed===imgFiles.length){
-        deck.sort((a,b)=>(a.srcNum||999)-(b.srcNum||999));
-        saveCustomDeck(deck);
-        renderCustomGrid();
-      }
-    });
-  });
-}
-
-// multi-select images (mobile + desktop)
-document.getElementById('customImgsInput').addEventListener('change',function(){
-  processUploadedFiles(Array.from(this.files));
-  this.value='';
-});
-
-document.getElementById('customSaveAllBtn').addEventListener('click',()=>{
-  const btn=document.getElementById('customSaveAllBtn');
-  btn.textContent='儲存中…';
-  loadCustomDeckFull().then(d=>{
-    const grid=document.getElementById('customCardGrid');
-    const items=grid.querySelectorAll('.custom-card-item');
-    items.forEach((item,idx)=>{
-      if(!d[idx])return;
-      const inputs=item.querySelectorAll('.custom-text-input');
-      if(inputs[0])d[idx].name=inputs[0].value.trim();
-      if(inputs[1])d[idx].kw=inputs[1].value.trim();
-    });
-    const nameVal=document.getElementById('customDeckNameInput').value.trim();
-    saveCustomMeta({name:nameVal});
-    saveCustomDeck(d);
-    btn.textContent='已儲存 ✓';
-    updateCustomCount();
-    const deckBtn=document.getElementById('deckBtnCustom');
-    if(deckBtn)deckBtn.textContent=nameVal||'自訂牌組';
-    setTimeout(()=>{btn.textContent='全部儲存';},2000);
-  });
-});
-
-document.getElementById('customClearBtn').addEventListener('click',()=>{
-  if(!loadCustomDeck().length)return;
-  if(!confirm('確定清除全部自訂牌張？'))return;
-  clearCustomDeckIDB().then(()=>renderCustomGrid());
-});
-
-function renderCustomGrid(){
-  updateCustomCount();
-  loadCustomDeckFull().then(deck=>{
-  const grid=document.getElementById('customCardGrid');
-  grid.innerHTML='';
-  if(!deck.length){
-    document.getElementById('customEmpty').style.display='block';
-    grid.style.display='none';
-    return;
-  }
-  document.getElementById('customEmpty').style.display='none';
-  grid.style.display='grid';
-  deck.forEach((card,idx)=>{
-    const item=document.createElement('div');item.className='custom-card-item';
-
-    // image wrap
-    const imgWrap=document.createElement('div');imgWrap.className='custom-card-img-wrap';
-    if(card.img){
-      const img=document.createElement('img');img.src=card.img;imgWrap.appendChild(img);
-    } else {
-      const ph=document.createElement('div');ph.className='custom-card-placeholder2';
-      ph.innerHTML='<div class="ccp2-icon">＋</div><div class="ccp2-txt">上傳圖片</div>';
-      imgWrap.appendChild(ph);
-    }
-    // order badge
-    const badge=document.createElement('div');badge.className='custom-card-order';badge.textContent=idx+1;imgWrap.appendChild(badge);
-    // delete btn
-    const delBtn=document.createElement('div');delBtn.className='custom-card-del';delBtn.textContent='×';
-    delBtn.addEventListener('click',e=>{
-      e.stopPropagation();
-      if(!confirm('刪除這張牌？'))return;
-      loadCustomDeckFull().then(d=>{
-        d.splice(idx,1);saveCustomDeck(d);renderCustomGrid();
-      });
-    });
-    imgWrap.appendChild(delBtn);
-    // change overlay + file input
-    const chg=document.createElement('div');chg.className='custom-card-change';chg.textContent='更換圖片';imgWrap.appendChild(chg);
-    const fi=document.createElement('input');fi.type='file';fi.accept='image/*';fi.style.display='none';imgWrap.appendChild(fi);
-    imgWrap.addEventListener('click',()=>fi.click());
-    fi.addEventListener('change',()=>{
-      if(!fi.files[0])return;
-      compressImage(fi.files[0],dataUrl=>{
-        loadCustomDeckFull().then(d=>{
-          d[idx].img=dataUrl;
-          saveCustomDeck(d);
-          imgWrap.querySelectorAll('img,.custom-card-placeholder2').forEach(e=>e.remove());
-          const newImg=document.createElement('img');newImg.src=dataUrl;
-          imgWrap.insertBefore(newImg,badge);
-          fi.value='';
-        });
-      });
-    });
-    item.appendChild(imgWrap);
-
-    // name input
-    const nameInput=document.createElement('input');
-    nameInput.type='text';nameInput.className='custom-text-input';
-    nameInput.placeholder='牌名（選填）';nameInput.value=card.name||'';
-    item.appendChild(nameInput);
-
-    // kw input
-    const kwInput=document.createElement('input');
-    kwInput.type='text';kwInput.className='custom-text-input';
-    kwInput.placeholder='關鍵字（選填）';kwInput.value=card.kw||'';
-    item.appendChild(kwInput);
-
-
-
-    grid.appendChild(item);
-  });
-  }); // end loadCustomDeckFull
-}
 
 function saveRecs(recs){localStorage.setItem('ooo_heart_recs',JSON.stringify(recs));}
 
@@ -1447,10 +1335,10 @@ function renderHistory(){
   el.innerHTML='';
   recs.forEach((r,idx)=>{
     const item=document.createElement('div');item.className='rec-item';
-    const deckLabel=r.deck==='custom'?'自訂牌組':r.deck===40?'Rana 40':'標準 36';
+    const deckLabel=r.deck===40?'Rana 40':'標準 36';
     // build item structure with DOM (avoid innerHTML conflicts)
     const meta=document.createElement('div');meta.className='rec-meta';
-    meta.innerHTML=`<span class="rec-date">${r.date}</span><span class="rec-deck-tag ${r.deck==='custom'?'tag-custom':r.deck===40?'tag-40':'tag-36'}">${deckLabel}</span><span class="rec-spread-tag">${r.spread}</span>`;
+    meta.innerHTML=`<span class="rec-date">${r.date}</span><span class="rec-deck-tag ${r.deck===40?'tag-40':'tag-36'}">${deckLabel}</span><span class="rec-spread-tag">${r.spread}</span>`;
     item.appendChild(meta);
     // layout preview
     const preview=document.createElement('div');preview.className='rec-layout-preview';
@@ -1522,13 +1410,18 @@ function downloadOne(idx){
 }
 
 renderHistory();
-// init custom deck btn label
-(()=>{
-  const deckBtn=document.getElementById('deckBtnCustom');
-  if(deckBtn)deckBtn.textContent=getCustomDeckName();
-})();
 </script>
 <script>
+
+// ── HELP PANEL ──
+function openHelp(){
+  document.getElementById('helpPanel').classList.add('open');
+  document.getElementById('helpOverlay').classList.add('open');
+}
+function closeHelp(){
+  document.getElementById('helpPanel').classList.remove('open');
+  document.getElementById('helpOverlay').classList.remove('open');
+}
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('service-worker.js')
